@@ -27,11 +27,11 @@ pip install -r requirments.txt
 ## **Dataset**
 All of the Dataset that used in this project are availabe in public Domain.Most of the Dataset are collected from Kaggle (https://www.kaggle.com/)
 different datsets contain  different column and different information like [title,text,subject,news_url,author]
-* _sample view of Dataset1_![Dataset1](dt1.PNG)
-* _sample view of Dataset2_![Dataset2](dt2.PNG)
-* _sample view of Dataset3_![Dataset3](dt3.PNG)
-* _sample view of Dataset4_![Dataset4](dt4.PNG)
-* _sample view of Dataset5_![Dataset5](dt5.PNG)
+* _sample view of Dataset1_![Dataset1](readme/dt1.PNG)
+* _sample view of Dataset2_![Dataset2](readme/dt2.PNG)
+* _sample view of Dataset3_![Dataset3](readme/dt3.PNG)
+* _sample view of Dataset4_![Dataset4](readme/dt4.PNG)
+* _sample view of Dataset5_![Dataset5](readme/dt5.PNG)
 
 For model Build need only text and Label,The final dataset will contain only 2 column ['Article','Label']
   * For text we will create a news column named 'Article' which is the Combination Header and text
@@ -65,12 +65,12 @@ We evaluated several machine learning classifiers to determine the most effectiv
 ### Performance Analysis
 Each model was trained on a dataset of **61,000+ records**. While multiple classifiers were tested, **Logistic Regression** emerged as the top performer with an accuracy of **87.04%**.
 
-![Accuracy Comparison](download%20(4).png)
+![Accuracy Comparison](readme/download%20(4).png)
 
 The finalized model is serialized as `model.pkl` for production use.
 
 #### Model Building Pipeline:
-![Model Building Flow](Modelbulding11.PNG)
+![Model Building Flow](readme/Modelbulding11.PNG)
 
 ---
 
@@ -81,10 +81,10 @@ The system is deployed using a **Flask** web framework. The interface allows use
 ### User Interface Examples:
 | Example 1 (Prediction) | Example 2 (Prediction) |
 | :--- | :--- |
-| ![Result 1](1.PNG) | ![Result 2](2.PNG) |
+| ![Result 1](readme/1.PNG) | ![Result 2](readme/2.PNG) |
 
 #### Deployment Architecture:
-![Deployment Flow](dep.PNG)
+![Deployment Flow](readme/dep.PNG)
 
 ---
 

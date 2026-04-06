@@ -1,25 +1,23 @@
 # Fake News Detection
 ## **Overview**
----
-The term fake news has become a buzz word these days.There was a time when if anyone needed any news, he or she would wait for the next-day newspaper. However, with the growth of online newspapers who update news almost instantly, people have found a better and faster way to be informed of the matter of his/her interest. Nowadays social-networking systems, online news portals, and other online media have become the main sources of news through which interesting and breaking news are shared at a rapid pace. However, many news portals serve special interest by feeding with distorted, partially correct, and sometimes imaginary news that is likely to attract the attention of a target group of people. Fake
-news has become a major concern for being destructive sometimes spreading confusion and deliberate disinformation among the people.
+The proliferation of digital media has fundamentally transformed how information is consumed. While online news portals and social networking platforms offer near-instantaneous updates, they have also become conduits for the rapid spread of "fake news." These distorted or entirely fabricated narratives are often engineered to manipulate public opinion, serve specific agendas, or generate sensationalist engagement.
 
-The Aims of this projects is to use the Natural Language Processing and Machine learning  to detect the Fake news based on the text content of the Article.And after building the suitable Machine learning model to detect the fake/true news then to deploye it into a web interface using python_Flask.
+The spread of deliberate disinformation poses a significant threat to social cohesion and informed decision-making. This project addresses this challenge by leveraging Natural Language Processing (NLP) and Machine Learning to evaluate the veracity of news articles based on their textual content. By developing a robust predictive model and deploying it via a Flask web interface, this system provides an accessible tool for identifying misinformation in real time.
 
-## **Prerequisites**
----
-### Things you need to install 
-1. Python 3.9
-     * This setup requires that your machine has python 3.9 installed on it. you can refer to this url https://www.python.org/downloads/ to download python. Once you have python downloaded and installed, you will need to setup PATH variables (if you want to run python program directly, detail instructions are below in how to run software section). To do that check this: https://www.pythoncentral.io/add-python-to-path-python-is-not-recognized-as-an-internal-or-external-command/.
-2. You will also need to download and install the required packages after you install python 
-     * Sklearn (scikit-learn)
-     * numpy
-     * Pandas
-     * matplotlib
-     * seaborn 
-     * NLTK
-     * Joblib
-     * flask 
+## Prerequisites
+
+### System Requirements
+* **Python 3.9+**: Ensure Python is installed on your system. You can download the latest version from [python.org](https://www.python.org/downloads/).
+* **Environment Variables**: Ensure Python is added to your system's `PATH`. If you encounter a "command not recognized" error, refer to [this guide](https://www.pythoncentral.io/add-python-to-path-python-is-not-recognized-as-an-internal-or-external-command/).
+
+### Required Libraries
+The project utilizes the following stack:
+* **Scikit-learn**: For implementing machine learning algorithms.
+* **Pandas & NumPy**: For data manipulation and numerical analysis.
+* **Matplotlib & Seaborn**: For data visualization.
+* **NLTK**: For Natural Language Processing tasks (tokenization, stop-word removal, etc.).
+* **Joblib**: For model serialization.
+* **Flask**: For the web application framework.
 3. To install the Packages
 ```Language
 pip install -r requirments.txt
@@ -27,76 +25,94 @@ pip install -r requirments.txt
 4. Or else use can download anaconda and use its anaconda prompt to run the commands. To install anaconda check this url https://www.anaconda.com/download/. most the Packages are preinstalled in the anaconda environment
 
 ## **Dataset**
----
 All of the Dataset that used in this project are availabe in public Domain.Most of the Dataset are collected from Kaggle (https://www.kaggle.com/)
 different datsets contain  different column and different information like [title,text,subject,news_url,author]
-* _sample view of Dataset1_![Dataset1](https://github.com/mohammed97ashraf/Fake_news_Detection/blob/main/dt1.PNG)
-* _sample view of Dataset2_![Dataset2](https://github.com/mohammed97ashraf/Fake_news_Detection/blob/main/dt2.PNG)
-* _sample view of Dataset3_![Dataset3](https://github.com/mohammed97ashraf/Fake_news_Detection/blob/main/dt3.PNG)
-* _sample view of Dataset4_![Dataset4](https://github.com/mohammed97ashraf/Fake_news_Detection/blob/main/dt4.PNG)
-* _sample view of Dataset5_![Dataset5](https://github.com/mohammed97ashraf/Fake_news_Detection/blob/main/dt5.PNG)
+* _sample view of Dataset1_![Dataset1](dt1.PNG)
+* _sample view of Dataset2_![Dataset2](dt2.PNG)
+* _sample view of Dataset3_![Dataset3](dt3.PNG)
+* _sample view of Dataset4_![Dataset4](dt4.PNG)
+* _sample view of Dataset5_![Dataset5](dt5.PNG)
 
-For model Build need only text and Label,The final dataset will contain only 2 column ['Article','Lable']
+For model Build need only text and Label,The final dataset will contain only 2 column ['Article','Label']
   * For text we will create a news column named 'Article' which is the Combination Header and text
-  * In the Lable column 
+  * In the Label column 
       * 1 replaset true
       * 0 replasent fake
 
-## **Data preprocessing**
+## Data Preparation & Preprocessing
+
+The model is built using two primary columns:
+* **Article**: A combined feature consisting of the article header and body text.
+* **Label**: The target variable where **1** represents **True** and **0** represents **Fake**.
+
+### Data Cleaning Steps:
+1.  **Feature Selection**: Removal of irrelevant metadata columns.
+2.  **Handling Missing Data**: Removal of records with null values.
+3.  **Text Normalization**: Removing brackets, punctuation (commas, apostrophes, quotes, etc.), and special characters.
+4.  **Noise Removal**: Elimination of numerical text and URLs to focus purely on linguistic patterns.
+
 ---
-1. Remove all unwanted columns.
-2. Remove All Missing Values Records.
-3. Removing all the extra information like brackets, any kind of puctuations - commas, apostrophes, quotes, question marks from Text.
-4. Remove all the numeric text, urls from Text.
 
-## **ML model Traning and Building**
+## Model Training & Evaluation
+
+We evaluated several machine learning classifiers to determine the most effective approach for fake news detection:
+
+* **Linear Models**: Logistic Regression, Stochastic Gradient Descent (SGD).
+* **Ensemble Methods**: Random Forest, Gradient Boosting (GBC), XGBoost.
+* **Naive Bayes**: Multinomial and Bernoulli Naive Bayes.
+* **Tree-based**: Decision Tree.
+
+### Performance Analysis
+Each model was trained on a dataset of **61,000+ records**. While multiple classifiers were tested, **Logistic Regression** emerged as the top performer with an accuracy of **87.04%**.
+
+![Accuracy Comparison](download%20(4).png)
+
+The finalized model is serialized as `model.pkl` for production use.
+
+#### Model Building Pipeline:
+![Model Building Flow](Modelbulding11.PNG)
+
 ---
-Here we have build all the classifiers for predicting the fake news detection. The extracted features are fed into different classifiers. We have used Logistic Regression,  Stochastic gradient descent,Random forest, GBC, xgboost, DecisionTree, Multinomial Naive Baye and Bernoulli Naive Baye  classifiers . Each of the extracted features were used in all of the classifiers. Once fitting the model, we compared the accuracy score and checked the confusion matrix.
 
-![accuracy score](https://github.com/mohammed97ashraf/Fake_news_Detection/blob/main/download%20(4).png)
+## Deployment
 
-_The highest accuracy score we are getting is 87.04 but don't worry the model was trained with 61,000+ recored it will perform well_
-Our finally selected and best performing classifier was Logistic Regression which was then saved on disk with name model.plk . Once you clone this repository, this model will be copied to your machine and will be used for prediction. It takes an news article as input from user then shown to user whether it is true or Fake.
-model.plk is used to deploy the model usinf Flask.
+The system is deployed using a **Flask** web framework. The interface allows users to input news text, which is then processed and analyzed by the backend model to return a "True" or "Fake" classification.
 
-#### Below is the Process Flow of the Model Building:
-![modelbuildingm](https://github.com/mohammed97ashraf/Fake_news_Detection/blob/main/Modelbulding11.PNG)
+### User Interface Examples:
+| Example 1 (Prediction) | Example 2 (Prediction) |
+| :--- | :--- |
+| ![Result 1](1.PNG) | ![Result 2](2.PNG) |
 
+#### Deployment Architecture:
+![Deployment Flow](dep.PNG)
 
-## **ML model Deployment**
 ---
-For Deploying we need to create a sample web interface which will get the text from the user and then send it to the flask server.In the flask server we will use the saved model model.plk to predict the news is real or fake and then return the result to the user through web interface.
- Example 1
-![result1](https://github.com/mohammed97ashraf/Fake_news_Detection/blob/main/1.PNG)
- Example 2
-![result2](https://github.com/mohammed97ashraf/Fake_news_Detection/blob/main/2.PNG)
 
-#### Below is the Process Flow of the Model Deployment:
-![model deployment](https://github.com/mohammed97ashraf/Fake_news_Detection/blob/main/dep.PNG)
+## Execution Guide
 
-
-## **Next steps**
----
-As we can see that our best performing models had an 87.04 accuracy score. This is due to the text are still containing stopwords and wordnet and for classification we used all the defult parameters and we didn't try the Deep Learning based classification.al thou 87.04 % accuracy with 61,000+ training dataset is not bad We will extend this project to implement these techniques in future to increase the accuracy and performance of our models.
-
-## **Steps to Run this software**
----
-1. The first step would be to clone this repo in a folder in your local machine. To do that you need to run following command in command prompt or in git bash
-```Language
-$ git clone  https://github.com/mohammed97ashraf/Fake_news_Detection.git
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/gargee1989/Fake-news-detection.git](https://github.com/Gargee1989/Fake-news-detection.git)
+cd Fake-news-detection
 ```
-2.This will copy all the data source file, program files and model into your machine.
+2. Initialize the Server
+Navigate to the deployment directory and run the Flask application:
 
-3.Then Open the app.py which is insise the 'Model deployment using Flask' folder/directory
+```bash
+# Navigate to the deployment folder
+cd "Model deployment using Flask"
 
-4.After you change the folder/directory link run app.py by using IDLE(defult python Editer) or open the command prompt in the same directory and run the folloing code
-```Language
-$ python app.py
+# Run the app
+python app.py
 ```
-5.Then in Your web browser type this link http:localhost:5000/.
+3. Access the Web Interface
+*Open your web browser and navigate to http://localhost:5000/.
+*Paste the news article text into the provided text box.
+*Click Submit to view the classification result.
+---
+### Future Enhancements
+While the current accuracy of 87.04% is robust given the large dataset, we aim to improve performance through:
 
-6.Then Enter the Text in  Text box you want to check and click on submit.
-
-7.Program will take user input text and will be used by model to classify in one of categories of "True" and "False". 
-
-8.Then the Flask server will return the result to your browser.
+1. **Advanced NLP**: Implmenting Stopword removal, Lemmatization, and WordNet integration.
+2. **Hyperparameter Tuning**: Optimizing classifier parameters beyond default settings.
+3. **Deep Learning**: Exploring LSTM or BERT-based architectures for more nuanced textual understanding.

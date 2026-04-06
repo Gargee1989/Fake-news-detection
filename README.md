@@ -92,23 +92,42 @@ The system is deployed using a **Flask** web framework. The interface allows use
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/gargee1989/Fake-news-detection.git](https://github.com/Gargee1989/Fake-news-detection.git)
+git clone https://github.com/Gargee1989/Fake-news-detection.git
 cd Fake-news-detection
 ```
-2. Initialize the Server
-Navigate to the deployment directory and run the Flask application:
+### 2. Environment Setup (Recommended)
+To avoid library conflicts, it is recommended to create a virtual environment:
+```bash
+# Create the environment
+python -m venv venv
+
+# Activate it (Windows)
+.\venv\Scripts\activate
+
+# Activate it (macOS/Linux)
+source venv/bin/activate
+``` 
+3. Install Dependencies
+Install all required libraries using the requirements.txt file:
 
 ```bash
-# Navigate to the deployment folder
+pip install -r requirements.txt
+```
+4. Run the Application
+Navigate to the deployment directory and start the Flask server:
+
+```bash
+# Navigate to the flask app directory
 cd "Model deployment using Flask"
 
-# Run the app
+# Launch the application
 python app.py
 ```
-3. Access the Web Interface
-*Open your web browser and navigate to http://localhost:5000/.
-*Paste the news article text into the provided text box.
-*Click Submit to view the classification result.
+5. Access the Web Interface
+* **Once the terminal displays Running on http://127.0.0.1:5000, open your web browser.**
+* **Navigate to: http://localhost:5000/**
+* **Input the news article text into the provided text area and click Submit.**
+* **The system will process the text and display whether the news is "True" or "Fake".**
 ---
 ### Future Enhancements
 While the current accuracy of 87.04% is robust given the large dataset, we aim to improve performance through:

@@ -20,7 +20,7 @@ The project utilizes the following stack:
 * **Flask**: For the web application framework.
 3. To install the Packages
 ```Language
-pip install -r requirments.txt
+pip install -r requirements.txt
 ```
 4. Or else use can download anaconda and use its anaconda prompt to run the commands. To install anaconda check this url https://www.anaconda.com/download/. most the Packages are preinstalled in the anaconda environment
 
